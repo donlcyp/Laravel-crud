@@ -5,31 +5,43 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
 
-                    <!-- Form to edit tweet -->
-                    @if (session('success'))
-                        {{ session('success') }}
-                    @endif
+                        <!-- Success Message -->
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            {{ $error }}
-                        @endforeach
-                    @endif
-                
-                    <form action="{{ route('tweets.update', $tweet->id) }}" method='POST'>
-                        @csrf 
-                        @method("PUT")
+                        <!-- Error Messages -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    
+                        <!-- Form to edit tweet -->
+                        <form action="{{ route('tweets.update', $tweet->id) }}" method='POST'>
+                            @csrf 
+                            @method("PUT")
 
-                        <label for="tweetText">What's on your mind?</label><br>
-                        <textarea id="tweetText" name="new_text" rows="4" cols="60">{{ old("new_text", $tweet["text"]) }}</textarea><br><br>
+                            <div class="mb-3">
+                                <label for="tweetText" class="form-label">What's on your mind?</label>
+                                <textarea id="tweetText" name="new_text" class="form-control" rows="4">{{ old("new_text", $tweet["text"]) }}</textarea>
+                            </div>
 
-                        <button type="submit">Update Tweet</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary">Update Tweet</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

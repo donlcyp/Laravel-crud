@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TwitterController; // Ensure this is correctly imported
+use App\Http\Controllers\TwitterController;
+use App\Http\Controllers\ChirpController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,6 +14,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('tweets', TwitterController::class);
+Route::resource('chirps', ChirpController::class)->middleware('auth');
 Route::get('/dashboard', [TwitterController::class, 'index'])->name('dashboard');
 Route::get('/tweets/{id}/edit', [TwitterController::class, 'edit'])->name('tweets.edit');
 
