@@ -34,4 +34,8 @@
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
 </x-app-layout>
+=======
+</x-app-layout> 
+>>>>>>> Stashed changes
