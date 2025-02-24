@@ -11,7 +11,6 @@ class TwitterController extends Controller
 {
     public function index()
     {
-        // Get and combine tweets and chirps
         $tweets = Tweet::latest()->get()->map(function($item) {
             $item->type = 'tweet';
             return $item;
@@ -22,19 +21,16 @@ class TwitterController extends Controller
             return $item;
         });
 
-        // Combine and sort by creation date
         $posts = $tweets->concat($chirps)->sortByDesc('created_at');
 
         return view('dashboard', compact('posts'));
     }
 
     public function store(Request $request) {
-        // Validate the request
         $request->validate([
                 'text' => 'required|string|max:280'
         ]);
 
-        // Create the tweet
         Tweet::create([
             'text' => $request->input('text'),
             'user_id' => Auth::id()
