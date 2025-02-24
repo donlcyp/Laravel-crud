@@ -1,10 +1,11 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center mb-4">
-            {{ __('Tweet Life') }}
-        </h2>
-    </x-slot>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center mb-4">
+                {{ __('Tweet Life') }}
+            </h2>
+        </x-slot>
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -19,6 +20,8 @@
                                 <button type="submit" class="btn btn-primary btn-block mt-3 shadow">Post Tweet</button>
                             </form>
 =======
+=======
+>>>>>>> 9b75894c09fc5dcc9e3068ca2e79a8e28a320a49
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -31,6 +34,7 @@
                                     <textarea id="tweetText" name="text" class="form-control" rows="3" placeholder="Write something..." style="border-radius: 10px; width: 100%; height: 150px; resize: none;"></textarea>
                                     <button type="submit" class="btn btn-primary btn-block mt-3 shadow">Post Tweet</button>
                                 </form>
+<<<<<<< HEAD
                             </div>
                             <hr class="my-4">
 
@@ -97,11 +101,41 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
+=======
+>>>>>>> 9b75894c09fc5dcc9e3068ca2e79a8e28a320a49
                             </div>
-                        @endif
+                            <hr class="my-4">
+
+                            <h3 class="text-center text-primary mb-3">Your Posts:</h3>
+                            <ul class="list-group mt-4" style="position: relative;">
+                                @foreach ($tweets as $tweet)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-4 mb-3 rounded-lg">
+                                        <div class="tweet-item" style="position: relative;">
+                                            <p class="mb-2 font-weight-bold tweet-text">{{ $tweet->text }}</p>
+                                            <a href="{{ route('tweets.edit', $tweet->id) }}" class="btn btn-sm btn-outline-info me-2">Edit</a>
+                                            <form action="{{ route('tweets.destroy', $tweet->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                            </form>
+                                            <small class="text-muted">Posted on: {{ $tweet->created_at->diffForHumans() }}</small>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger mt-4">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </x-app-layout>

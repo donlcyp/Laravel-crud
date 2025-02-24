@@ -7,7 +7,11 @@
         <li>No tweets available.</li>
     @else
         @foreach ($tweets as $tweet)
-            <li>{{ $tweet->text }}</li>
+            <li>
+                <strong>{{ $tweet->user->name }}:</strong> 
+                {{ $tweet->text }}
+            </li>
+
         @endforeach  
     @endif
 </ul>
