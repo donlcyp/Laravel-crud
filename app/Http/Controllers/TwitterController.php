@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
-use App\Models\Chirp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,13 +14,8 @@ class TwitterController extends Controller
             $item->type = 'tweet';
             return $item;
         });
-        
-        $chirps = Chirp::latest()->get()->map(function($item) {
-            $item->type = 'chirp';
-            return $item;
-        });
 
-        $posts = $tweets->concat($chirps)->sortByDesc('created_at');
+        $posts = $tweets->sortByDesc('created_at');
 
         return view('dashboard', compact('posts'));
     }
